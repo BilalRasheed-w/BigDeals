@@ -1,8 +1,7 @@
 import { asyncHandler, customError } from "../Error/globalError.js";
 import User from "../models/userM.js";
-import { RecoveryMail } from "../utils/sendEmail.js";
+import { RecoveryMail, WelcomeMail } from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
-
 
 // @ user routes
 const registerUser = asyncHandler(async (req, res, next) => {
@@ -17,8 +16,8 @@ const registerUser = asyncHandler(async (req, res, next) => {
       imageUrl: "sample id",
     },
   });
-
   sendToken(user, 200, res);
+  // WelcomeMail(user);
 });
 
 const loginUser = asyncHandler(async (req, res, next) => {
@@ -109,10 +108,6 @@ const makeAdmin = asyncHandler(async (req, res, next) => {
   if (!user) throw new customError("User Not Found", 404);
   res.status(200).json({ user });
 });
-
-
-
-
 
 export {
   registerUser,
