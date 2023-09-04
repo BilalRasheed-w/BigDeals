@@ -1,3 +1,5 @@
+// sending token if the user is logged in or newly registered
+
 const sendToken = (user, statusCode, res) => {
   const token = user.getJwtToken();
   const cookieOptions = {
@@ -7,7 +9,10 @@ const sendToken = (user, statusCode, res) => {
     ),
   };
 
-  res.status(statusCode).cookie("token", token, cookieOptions).json({ user, token });
+  res
+    .status(statusCode)
+    .cookie("token", token, cookieOptions)
+    .json({ user, token });
 };
 
 export default sendToken;

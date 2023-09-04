@@ -1,6 +1,6 @@
 import Jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-
+// sending mails to  user emails
 const RecoveryMail = async (user) => {
   const token = Jwt.sign(
     { id: user._id, email: user.email },

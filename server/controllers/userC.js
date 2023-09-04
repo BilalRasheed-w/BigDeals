@@ -3,6 +3,8 @@ import User from "../models/userM.js";
 import { RecoveryMail } from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 
+
+// @ user routes
 const registerUser = asyncHandler(async (req, res, next) => {
   const EmailExist = await User.findOne({ email: req.body.email });
   if (EmailExist) throw new customError("email already exist", 409);
@@ -107,6 +109,10 @@ const makeAdmin = asyncHandler(async (req, res, next) => {
   if (!user) throw new customError("User Not Found", 404);
   res.status(200).json({ user });
 });
+
+
+
+
 
 export {
   registerUser,

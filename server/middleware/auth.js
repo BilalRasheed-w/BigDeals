@@ -17,7 +17,7 @@ const isAuthorized = asyncHandler(async (req, res, next) => {
   next();
 });
 
-// for reset link
+// for reset password link
 const VerifyJwt =asyncHandler(async (req, res, next) => {
   const token = req.params.token
   if (!token)
