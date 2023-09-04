@@ -3,16 +3,18 @@ import Product from "../models/productM.js";
 import ApiFeatures from "../utils/apiFeatures.js";
 
 const getProducts = async (req, res, next) => {
+  const NumOfProducts = await Product.countDocuments();
   const resultPerPage = 10;
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultPerPage);
   const products = await apiFeatures.query;
-  res.status(201).json({ success: true, products });
+  res.status(201).json({ success: true, NumOfProducts, products });
 };
 
 const createProduct = asyncHandler(async (req, res, next) => {
+  req.body.user = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,
